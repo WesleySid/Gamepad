@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import reddit from "/Users/wesleysid/GamePad/my-react-app/src/img/reddit-logo.jpg";
+import reddit from "/Users/wesleysid/GamePad/my-react-app/img/reddit-logo.jpg";
 import axios from "axios";
 
 // Fonction pour supprimer les balises HTML de la description

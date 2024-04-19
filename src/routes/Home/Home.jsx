@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import xboxLogo from "/Users/wesleysid/GamePad/my-react-app/src/img/xbox-logo.jpg";
-import ps4Logo from "/Users/wesleysid/GamePad/my-react-app/src/img/logo-play.jpg";
-import pcLogo from "/Users/wesleysid/GamePad/my-react-app/src/img/logowindows.jpg";
-import macLogo from "/Users/wesleysid/GamePad/my-react-app/src/img/mac-logo.jpg";
+import xboxLogo from "/Users/wesleysid/GamePad/my-react-app/img/xbox-logo.jpg";
+import ps4Logo from "/Users/wesleysid/GamePad/my-react-app/img/logo-play.jpg";
+import pcLogo from "/Users/wesleysid/GamePad/my-react-app/img/logowindows.jpg";
+import macLogo from "/Users/wesleysid/GamePad/my-react-app/img/mac-logo.jpg";
 
 const Home = () => {
   const [games, setGames] = useState([]);

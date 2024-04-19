@@ -1,4 +1,4 @@
-import logo from "../img/logo.jpg";
+import logo from "/Users/wesleysid/GamePad/my-react-app/img/logo.jpg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
