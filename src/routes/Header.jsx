@@ -42,7 +42,7 @@ const Header = () => {
     <div className="head-container">
       <div className="header">
         <Link to="/">
-          <img src={logo} alt="Logo" />{" "}
+          <img src={logo} alt="Logo" />
         </Link>
         <button>Rate top games !</button>
         <div className="searchbar-container">
