@@ -1,4 +1,4 @@
-import logo from "/Users/wesleysid/GamePad/my-react-app/img/logo.jpg";
+//import logo from "/Users/wesleysid/GamePad/my-react-app/img/logo.jpg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -41,9 +41,7 @@ const Header = () => {
   return (
     <div className="head-container">
       <div className="header">
-        <Link to="/">
-          <img src={logo} alt="Logo" />
-        </Link>
+        <Link to="/">{/*<img src={logo} alt="Logo" /> */}</Link>
         <button>Rate top games !</button>
         <div className="searchbar-container">
           <input
