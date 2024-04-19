@@ -118,46 +118,22 @@ const Game = () => {
           </div>
           {game.ratings && game.ratings.length > 0 && (
             <div className="ratings">
-              <div
-                className="rating-bar"
-                style={{
-                  width: `${game.ratings[0].percent || 0}%`,
-                  backgroundColor: "#00cc00",
-                }}
-              >
-                <h2>{game.ratings[0].title} 🤩</h2>
-                <span>{game.ratings[0].count}</span>
-              </div>
-              <div
-                className="rating-bar"
-                style={{
-                  width: `${game.ratings[1].percent || 0}%`,
-                  backgroundColor: "#ffcc00",
-                }}
-              >
-                <h2>{game.ratings[1].title} 👍🏼</h2>
-                <span>{game.ratings[1].count}</span>
-              </div>
-              <div
-                className="rating-bar"
-                style={{
-                  width: `${game.ratings[2].percent || 0}%`,
-                  backgroundColor: "#ff9900",
-                }}
-              >
-                <h2>{game.ratings[2].title} 😐</h2>
-                <span>{game.ratings[2].count}</span>
-              </div>
-              <div
-                className="rating-bar"
-                style={{
-                  width: `${game.ratings[3].percent || 0}%`,
-                  backgroundColor: "#ff3300",
-                }}
-              >
-                <h2>{game.ratings[3].title} ❌</h2>
-                <span>{game.ratings[3].count}</span>
-              </div>
+              {game.ratings.map((rating, index) => (
+                <div
+                  key={index}
+                  className="rating-bar"
+                  style={{
+                    width: `${rating.percent || 0}%`,
+                    backgroundColor:
+                      rating.percent != null ? "#2C2C2C" : "#ff0000", // Couleur différente si null ou undefined
+                  }}
+                >
+                  <h2>
+                    {rating.title || "Unknown"} {rating.title ? "" : "No vote"}
+                  </h2>
+                  <span className="rate-num">{rating.count || 0}</span>
+                </div>
+              ))}
               <div className="comment-button-container">
                 <button className="comment-button">Write a review</button>
                 <button className="comment-button">Write a comment</button>

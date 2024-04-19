@@ -57,7 +57,7 @@ const Header = () => {
 
         <button className="head-button">LOG IN</button>
         <button className="head-button">SIGN UP</button>
-        <button className="head-button">API</button>
+        <button className="head-button">FAVORITES</button>
 
         <button className="menu-toggle" onClick={toggleMenu}>
           Menu
@@ -67,28 +67,31 @@ const Header = () => {
           <button onClick={toggleMenu}>X</button>
           <button>LOG IN</button>
           <button>SIGN UP</button>
-          <button>API</button>
+          <button>FAVORITES</button>
           <button>Rate top games !</button>
         </div>
       </div>
       {showResults && (
         <div className="search-results">
           <ul>
-            {searchResults.map((result) => (
-              <Link
-                key={result.id}
-                to={`/games/${result.id}?key=7860ec0e9ebb4fa89176f2c7dd732512`}
-              >
-                <li>
-                  <img
-                    src={result.image_background}
-                    className="search-logo"
-                    alt=""
-                  />
-                  <span className="search-title"> {result.name}</span>
-                </li>
-              </Link>
-            ))}
+            {searchResults.map((result) => {
+              console.log("search barre", result);
+              return (
+                <Link
+                  key={result.id}
+                  to={`/games/${result.id}?key=7860ec0e9ebb4fa89176f2c7dd732512`}
+                >
+                  <li className="search-list">
+                    <img
+                      src={result.background_image}
+                      className="search-logo"
+                      alt=""
+                    />
+                    <span className="search-title"> {result.name}</span>
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
         </div>
       )}
