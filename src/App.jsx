@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Header from "./routes/Header";
-import Home from "./routes/Home/Home";
+import Home from "./routes/Home";
 import Footer from "./routes/Footer";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Game from "./routes/Home/Game";
+import Game from "./routes/Game";
 function App() {
   return (
     <>
