@@ -20,6 +20,7 @@ const Profile = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log(response.data);
 
         setProfileData(response.data);
       } catch (error) {
@@ -45,9 +46,9 @@ const Profile = () => {
       {profileData ? (
         <div>
           <h1>Hello {profileData.username}</h1>
-          {profileData.profilePictureUrl && (
+          {profileData.picture && (
             <img
-              src={profileData.profilePictureUrl}
+              src={profileData.picture}
               className="preview-pic"
               alt="Profile"
             />

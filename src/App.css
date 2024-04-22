@@ -76,6 +76,12 @@ a {
   .searchbar {
     width: 30vw;
   }
+  .second-title {
+    text-align: center;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+  }
 }
 .menu-gauche {
   color: white;
@@ -148,10 +154,49 @@ p {
   flex-direction: column;
   justify-content: space-between;
 }
+.filter {
+  display: flex;
+  justify-content: center;
+}
+.filter button {
+  color: white;
+  background-color: black;
+  border: solid, 5px, white;
+  height: 40px;
+  border-radius: 10px;
+  margin: 20px;
+  width: 200px;
+  font-size: 20px;
+}
+.filter button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+.page-button {
+  color: white;
+  background-color: black;
+  border: solid, 5px, white;
+  height: 40px;
+  border-radius: 10px;
+  margin: 20px;
+  width: 200px;
+  font-size: 20px;
+}
+.page-button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
 .game h2 {
   margin-bottom: 10px;
   color: white;
   font-size: 30px;
+  text-align: center;
 }
 .filter {
   margin: 10px;
@@ -230,6 +275,11 @@ p {
 .rate-num {
   background-color: #2c2c2c;
   border-radius: 20px;
+  width: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rating-bar {
@@ -242,6 +292,9 @@ p {
   width: 200px;
   border-radius: 10px;
 }
+.rating-bar:hover {
+  cursor: pointer;
+}
 
 .rating-bar h2 {
   margin-right: 10px;
@@ -250,6 +303,13 @@ p {
 .rating-bar span {
   margin-left: auto;
   padding-left: 10px;
+  text-align: center;
+}
+.rate-num:hover {
+  background-color: white;
+  color: black;
+  height: 40px;
+  text-align: center;
 }
 
 .game-synopsis {
