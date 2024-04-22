@@ -1,30 +1,43 @@
-import logo from "/img/logo.jpg";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import axios from "axios";
+import logo from "/img/logo.jpg";
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    console.log("Header monté");
+
+    // Vérifie si l'utilisateur est authentifié lors du chargement du composant
+    const checkAuthentication = () => {
+      const token = Cookies.get("token");
+      setIsAuthenticated(!!token); // Définit isAuthenticated sur true si un jeton est présent
+    };
+    checkAuthentication();
+  }, []);
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
   };
+
   const handleSearch = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-    // Mettre à jour showResults seulement si la barre de recherche n'est pas vide
     setShowResults(!!value);
   };
-  const handleSubmit = async (event) => {
+
+  const handleSubmit = async () => {
     try {
       const response = await axios.get(
         `https://api.rawg.io/api/games?key=7860ec0e9ebb4fa89176f2c7dd732512&search=${searchTerm}`
       );
       const results = response.data.results;
-      console.log("Search Results:", results); // Ajout du console.log
       setSearchResults(results);
       setShowResults(true);
     } catch (error) {
@@ -32,11 +45,7 @@ const Header = () => {
     }
   };
 
-  useEffect(() => {
-    if (searchTerm) {
-      handleSubmit();
-    }
-  }, [searchTerm]);
+  console.log("isAuthenticated:", isAuthenticated); // Ajout du console.log
 
   return (
     <div className="head-container">
@@ -54,44 +63,60 @@ const Header = () => {
             onChange={handleSearch}
           />
         </div>
-
-        <button className="head-button">LOG IN</button>
-        <button className="head-button">SIGN UP</button>
-        <button className="head-button">FAVORITES</button>
+        {!isAuthenticated && (
+          <>
+            <Link to="/login">
+              <button className="head-button">LOG IN</button>
+            </Link>
+            <Link to="/signup">
+              <button className="head-button">SIGN UP</button>
+            </Link>
+          </>
+        )}
+        {isAuthenticated && <button className="head-button">FAVORITES</button>}
+        <Link to="/profile">
+          {isAuthenticated && (
+            <button className="head-button">MY PROFILE</button>
+          )}
+        </Link>
 
         <button className="menu-toggle" onClick={toggleMenu}>
           Menu
         </button>
-
         <div className={menuActive ? "menu-active" : "menu"}>
           <button onClick={toggleMenu}>X</button>
-          <button>LOG IN</button>
-          <button>SIGN UP</button>
-          <button>FAVORITES</button>
+          {!isAuthenticated && (
+            <>
+              <Link to="/login">
+                <button>LOG IN</button>
+              </Link>
+              <Link to="/signup">
+                <button>SIGN UP</button>
+              </Link>
+            </>
+          )}
+          {isAuthenticated && <button>FAVORITES</button>}
           <button>Rate top games !</button>
         </div>
       </div>
       {showResults && (
         <div className="search-results">
           <ul>
-            {searchResults.map((result) => {
-              console.log("search barre", result);
-              return (
-                <Link
-                  key={result.id}
-                  to={`/games/${result.id}?key=7860ec0e9ebb4fa89176f2c7dd732512`}
-                >
-                  <li className="search-list">
-                    <img
-                      src={result.background_image}
-                      className="search-logo"
-                      alt=""
-                    />
-                    <span className="search-title"> {result.name}</span>
-                  </li>
-                </Link>
-              );
-            })}
+            {searchResults.map((result) => (
+              <Link
+                key={result.id}
+                to={`/games/${result.id}?key=7860ec0e9ebb4fa89176f2c7dd732512`}
+              >
+                <li className="search-list">
+                  <img
+                    src={result.background_image}
+                    className="search-logo"
+                    alt=""
+                  />
+                  <span className="search-title">{result.name}</span>
+                </li>
+              </Link>
+            ))}
           </ul>
         </div>
       )}
