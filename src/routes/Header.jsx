@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import logo from "/img/logo.jpg";
@@ -8,16 +8,12 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    console.log("Header monté");
-
-    // Vérifie si l'utilisateur est authentifié lors du chargement du composant
     const checkAuthentication = () => {
       const token = Cookies.get("token");
-      setIsAuthenticated(!!token); // Définit isAuthenticated sur true si un jeton est présent
+      setIsAuthenticated(!!token);
     };
     checkAuthentication();
   }, []);
@@ -26,27 +22,26 @@ const Header = () => {
     setMenuActive(!menuActive);
   };
 
-  const handleSearch = (event) => {
+  // Fonction pour gérer les changements dans la barre de recherche
+  const handleSearch = async (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-    setShowResults(!!value);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.rawg.io/api/games?key=7860ec0e9ebb4fa89176f2c7dd732512&search=${searchTerm}`
-      );
-      const results = response.data.results;
-      setSearchResults(results);
-      setShowResults(true);
-    } catch (error) {
-      console.error(error);
+    if (value.trim() !== "") {
+      try {
+        const response = await axios.get(
+          `https://api.rawg.io/api/games?key=7860ec0e9ebb4fa89176f2c7dd732512&search=${value}`
+        );
+        const results = response.data.results;
+        setSearchResults(results);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      setSearchResults([]);
     }
   };
 
-  console.log("isAuthenticated:", isAuthenticated); // Ajout du console.log
-
+  // Affichage des résultats de recherche lorsqu'ils sont disponibles
   return (
     <div className="head-container">
       <div className="header">
@@ -63,6 +58,7 @@ const Header = () => {
             onChange={handleSearch}
           />
         </div>
+
         {!isAuthenticated && (
           <>
             <Link to="/login">
@@ -83,6 +79,7 @@ const Header = () => {
         <button className="menu-toggle" onClick={toggleMenu}>
           Menu
         </button>
+
         <div className={menuActive ? "menu-active" : "menu"}>
           <button onClick={toggleMenu}>X</button>
           {!isAuthenticated && (
@@ -99,7 +96,8 @@ const Header = () => {
           <button>Rate top games !</button>
         </div>
       </div>
-      {showResults && (
+
+      {searchResults.length > 0 && (
         <div className="search-results">
           <ul>
             {searchResults.map((result) => (

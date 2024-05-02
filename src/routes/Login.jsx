@@ -31,7 +31,7 @@ const Login = () => {
       if (response.status === 200) {
         console.log("Authentification réussie !");
         Cookies.set("token", response.data.token, { expires: 7 });
-        localStorage.setItem("token", response.data.token); // Correction: Utiliser response.data.token
+        localStorage.setItem("token", response.data.token);
         console.log("Token défini :", response.data.token);
         setIsAuthenticated(true);
 
